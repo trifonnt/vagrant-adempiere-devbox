@@ -103,7 +103,7 @@ echo 'SHELL=/bin/zsh' >> /etc/environment
 ##su -c 'umake ide idea /home/vagrant/.local/share/umake/ide/idea' vagrant
 
 # Install Eclipse IDE
-#su -c 'umake ide eclipse /home/vagrant/.local/share/umake/ide/eclipse' vagrant
+su -c 'umake ide eclipse /home/vagrant/.local/share/umake/ide/eclipse' vagrant
 
 # Increase Inotify limit (see https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit)
 echo "fs.inotify.max_user_watches = 524288" > /etc/sysctl.d/60-inotify.conf
