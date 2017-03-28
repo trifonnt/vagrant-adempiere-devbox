@@ -1,4 +1,4 @@
-# ADempiere official "development box"
+# ADempiere "development box"
 
 ## Introduction
 
