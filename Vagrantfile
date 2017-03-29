@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
     config.vm.box = "bento/ubuntu-16.04"
     config.vm.hostname = "adempiere-devbox"
-    config.vm.provision :shell, :path => "scripts/setup.sh"
+
     config.ssh.insert_key = true
     config.vm.synced_folder '.', '/vagrant', disabled: true
 
@@ -21,4 +21,7 @@ Vagrant.configure("2") do |config|
         vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']
         vb.customize ['modifyvm', :id, '--draganddrop', 'bidirectional']
     end
+
+    # Initial run script, executed as ROOT user
+    config.vm.provision :shell, :path => "scripts/setup.sh"
 end
