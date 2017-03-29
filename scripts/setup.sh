@@ -113,8 +113,16 @@ echo 'SHELL=/bin/zsh' >> /etc/environment
 ## Install IDEA community edition - COMMENTED
 ##su -c 'umake ide idea /home/vagrant/.local/share/umake/ide/idea' vagrant
 
-# Install Eclipse IDE
-su -c 'umake ide eclipse /home/vagrant/.local/share/umake/ide/eclipse' vagrant
+# Install Eclipse IDE - via umake
+# umake ide eclipse --remove
+#su -c 'umake ide eclipse /home/vagrant/.local/share/umake/ide/eclipse' vagrant
+#
+# Install Eclipse IDE JEE 4.5(Mars) - via download
+cd /home/vagrant/.local/share/umake/ide
+su -c 'wget http://mirror.dkm.cz/eclipse/technology/epp/downloads/release/mars/2/eclipse-jee-mars-2-linux-gtk-x86_64.tar.gz' vagrant
+su -c 'tar xvzf eclipse-jee-mars-2-linux-gtk-x86_64.tar.gz' vagrant
+rm -rf eclipse-jee-mars-2-linux-gtk-x86_64.tar.gz
+
 
 # Increase Inotify limit (see https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit)
 echo "fs.inotify.max_user_watches = 524288" > /etc/sysctl.d/60-inotify.conf
