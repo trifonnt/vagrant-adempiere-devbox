@@ -26,6 +26,8 @@ dpkg-reconfigure -f noninteractive tzdata
 
 # Install Java 8
 apt-get install default-jdk
+# Set JAVA_HOME
+echo 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' >> /etc/environment
 
 ################################################################################
 # Install the graphical environment
@@ -75,7 +77,7 @@ apt-get install -y pgadmin3
 ## Install Heroku toolbelt - COMMENTED
 #wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-# install Guake
+# Install Guake
 apt-get install -y guake
 cp /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
