@@ -17,8 +17,8 @@ dpkg-reconfigure locales
 # Install utilities
 apt-get -y install vim git zip bzip2 fontconfig curl language-pack-en
 
-# @Trifon - Additional utilities (MidnightCommander, wget, Meld)
-apt-get -y install mc wget meld
+# @Trifon - Additional utilities (MidnightCommander, wget, Meld, gedit)
+apt-get -y install mc wget meld gedit
 
 # @Trifon - Time zone(UTC+2)
 ln -fs /usr/share/zoneinfo/Europe/Sofia /etc/localtime
