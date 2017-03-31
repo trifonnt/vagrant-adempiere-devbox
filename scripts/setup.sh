@@ -7,7 +7,6 @@ apt-get upgrade
 ################################################################################
 # Install the mandatory tools
 ################################################################################
-
 export LANGUAGE='en_US.UTF-8'
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
@@ -66,12 +65,9 @@ sed -i -e 's/xubuntu-wallpaper.png/adempiere-wallpaper.png/' /etc/xdg/xdg-xubunt
 ################################################################################
 
 # Install Ubuntu Make - see https://wiki.ubuntu.com/ubuntu-make
-
 add-apt-repository -y ppa:ubuntu-desktop/ubuntu-make
-
 apt-get update
 apt-get upgrade
-
 apt install -y ubuntu-make
 
 # Install Chromium Browser
