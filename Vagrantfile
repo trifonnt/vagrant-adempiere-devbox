@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
     config.vm.box = "bento/ubuntu-16.04"
-    config.vm.hostname = "adempiere-devbox"
+    config.vm.hostname = "adempiere-devbox-360"
 
     config.ssh.insert_key = true
     config.vm.synced_folder '.', '/vagrant', disabled: true
