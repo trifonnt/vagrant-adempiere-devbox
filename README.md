@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a [Vagrant](https://www.vagrantup.com/) configuration to set up a complete, virtualized development environment for JHipster users.
+This is a [Vagrant](https://www.vagrantup.com/) configuration to set up a complete, virtualized development environment for ADempiere developers.
 
 1. [Usage](#usage)
 2. [Installation](#setup)
@@ -11,7 +11,7 @@ This is a [Vagrant](https://www.vagrantup.com/) configuration to set up a comple
 
 ## <a name="usage"></a> Usage
 
-The ADempiere "development box" is a complete development environment for ADempiere users.
+The ADempiere "development box" is a complete development environment for ADempiere developers.
 
 It requires to have [Vagrant](https://www.vagrantup.com/) installed on your machine.
 
