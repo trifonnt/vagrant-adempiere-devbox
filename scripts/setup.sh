@@ -23,8 +23,13 @@ apt-get -y install mc wget meld gedit
 ln -fs /usr/share/zoneinfo/Europe/Sofia /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
 
-# Install Java 6
-apt-get install oracle-java6-installer
+# Install Java 6 -- DO NOT work!!!
+#apt-get install oracle-java6-installer
+###
+# Install Java 6 -- DO NOT work!!!
+#add-apt-repository ppa:webupd8team/java
+#apt-get update
+#apt-get install oracle-java6-installer
 
 # Install Java 7
 add-apt-repository ppa:openjdk-r/ppa  
