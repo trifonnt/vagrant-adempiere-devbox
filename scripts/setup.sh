@@ -24,18 +24,24 @@ ln -fs /usr/share/zoneinfo/Europe/Sofia /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
 
 # Install Java 7
-add-apt-repository ppa:openjdk-r/ppa  
-apt-get update   
-apt-get -y install openjdk-7-jdk
+#add-apt-repository ppa:openjdk-r/ppa  
+#apt-get update   
+#apt-get -y install openjdk-7-jdk
 # Update alternatives - If necessary
 # update-java-alternatives -s java-1.7.0-openjdk-amd64
 # Set JAVA_HOME
-echo 'JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64' >> /etc/environment
+#echo 'JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64' >> /etc/environment
 
-## Install Java 8
-#apt-get install default-jdk
+## Install Java 8 - OpenJDK
+apt-get install openjdk-8-jdk
 ## Set JAVA_HOME
-#echo 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' >> /etc/environment
+echo 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' >> /etc/environment
+
+## Install Java 8 - Oracle
+#echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections 
+#echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+#apt-get -y install oracle-java8-installer
+
 
 ################################################################################
 # Install the graphical environment
@@ -99,6 +105,24 @@ cp /home/vagrant/.oh-my-zsh/templates/zshrc.zsh-template /home/vagrant/.zshrc
 chsh -s /bin/zsh vagrant
 echo 'SHELL=/bin/zsh' >> /etc/environment
 
+## Gedit
+su -c 'mkdir -p /home/vagrant/Desktop' vagrant
+echo '[Desktop Entry]
+Version=1.0
+Name=Gedit
+Exec=/usr/bin/gedit %U
+Terminal=false
+Icon=
+Type=Application
+Categories=
+MimeType=text/html;text/xml;application/xhtml_xml;
+Actions=NewWindow;NewPrivateWindow;
+
+[Desktop Action NewWindow]
+Name=New Window
+Exec=/usr/bin/gedit' > /home/vagrant/Desktop/gedit.desktop
+chmod +x /home/vagrant/Desktop/gedit.desktop
+
 ## Install Visual Studio Code - COMMENTED
 #su -c 'umake ide visual-studio-code /home/vagrant/.local/share/umake/ide/visual-studio-code --accept-license' vagrant
 ## Fix links (see https://github.com/ubuntu/ubuntu-make/issues/343)
@@ -113,11 +137,35 @@ echo 'SHELL=/bin/zsh' >> /etc/environment
 # umake ide eclipse --remove
 #su -c 'umake ide eclipse /home/vagrant/.local/share/umake/ide/eclipse' vagrant
 #
-# Install Eclipse IDE JEE 4.5(Mars) - via download
+# Install Eclipse IDE JEE 4.7(Oxygen) - via download
+su -c 'mkdir -p /home/vagrant/.local/share/umake/ide' vagrant
 cd /home/vagrant/.local/share/umake/ide
-su -c 'wget http://mirror.dkm.cz/eclipse/technology/epp/downloads/release/mars/2/eclipse-jee-mars-2-linux-gtk-x86_64.tar.gz' vagrant
-su -c 'tar xvzf eclipse-jee-mars-2-linux-gtk-x86_64.tar.gz' vagrant
-rm -rf eclipse-jee-mars-2-linux-gtk-x86_64.tar.gz
+
+su -c 'wget http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/epp/downloads/release/oxygen/1/eclipse-jee-oxygen-1-linux-gtk-x86_64.tar.gz' vagrant
+su -c 'tar xvzf eclipse-jee-oxygen-1-linux-gtk-x86_64.tar.gz' vagrant
+rm -rf eclipse-jee-oxygen-1-linux-gtk-x86_64.tar.gz
+su -c 'mv eclipse 4.7-jee' vagrant
+su -c 'mkdir -p eclipse' vagrant
+su -c 'mv 4.7-jee eclipse/4.7-jee' vagrant
+
+echo '[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Eclipse-4.7-JEE
+Icon=/home/vagrant/.local/share/umake/ide/eclipse/4.7-jee/icon.xpm
+Exec=/home/vagrant/.local/share/umake/ide/eclipse/4.7-jee/eclipse %U
+Terminal=false
+Comment=Eclipse Java EE IDE
+Categories=Development;IDE;
+MimeType=text/html;text/xml;application/xhtml_xml;
+Actions=NewWindow;NewPrivateWindow;
+
+[Desktop Action NewWindow]
+Name=New Window
+Exec=/home/vagrant/.local/share/umake/ide/eclipse/4.7-jee/eclipse' > /home/vagrant/Desktop/eclipse-4.7-jee.desktop
+chmod +x /home/vagrant/Desktop/eclipse-4.7-jee.desktop
+su -c 'mkdir -p /home/vagrant/.local/share/applications/' vagrant
+su -c 'ln -s /home/vagrant/Desktop/eclipse-4.7-jee.desktop /home/vagrant/.local/share/applications/eclipse-4.7-jee.desktop' vagrant
 
 
 # Increase Inotify limit (see https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit)
@@ -143,3 +191,4 @@ apt-get -y clean
 apt-get -y autoremove
 dd if=/dev/zero of=/EMPTY bs=1M > /dev/null 2>&1
 rm -f /EMPTY
+reboot
