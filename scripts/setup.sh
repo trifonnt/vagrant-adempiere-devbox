@@ -133,6 +133,8 @@ chmod +x /usr/local/bin/docker-compose
 
 # Configure docker group (docker commands can be launched without sudo)
 usermod -aG docker vagrant
+# Add user "vagrant" to group "vboxsf", this allows shared folder to be read by "vagrant" user.
+usermod -aG vboxsf vagrant
 
 # Fix ownership of home
 chown -R vagrant:vagrant /home/vagrant/
