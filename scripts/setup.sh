@@ -107,6 +107,24 @@ cp /home/vagrant/.oh-my-zsh/templates/zshrc.zsh-template /home/vagrant/.zshrc
 chsh -s /bin/zsh vagrant
 echo 'SHELL=/bin/zsh' >> /etc/environment
 
+## Gedit
+su -c 'mkdir -p /home/vagrant/Desktop' vagrant
+echo '[Desktop Entry]
+Version=1.0
+Name=Gedit
+Exec=/usr/bin/gedit %U
+Terminal=false
+Icon=
+Type=Application
+Categories=
+MimeType=text/html;text/xml;application/xhtml_xml;
+Actions=NewWindow;NewPrivateWindow;
+
+[Desktop Action NewWindow]
+Name=New Window
+Exec=/usr/bin/gedit' > /home/vagrant/Desktop/gedit.desktop
+chmod +x /home/vagrant/Desktop/gedit.desktop
+
 ## Install Visual Studio Code - COMMENTED
 #su -c 'umake ide visual-studio-code /home/vagrant/.local/share/umake/ide/visual-studio-code --accept-license' vagrant
 ## Fix links (see https://github.com/ubuntu/ubuntu-make/issues/343)
@@ -139,7 +157,7 @@ curl -sL https://get.docker.io/ | sh
 curl -L "$(curl -s https://api.github.com/repos/docker/compose/releases | grep browser_download_url | head -n 4 | grep Linux | cut -d '"' -f 4)" > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-# Configure docker group (docker commands can be launched without sudo)
+# Configure "docker" group (docker commands can be launched without sudo)
 usermod -aG docker vagrant
 # Add user "vagrant" to group "vboxsf", this allows shared folder to be read by "vagrant" user.
 usermod -aG vboxsf vagrant
