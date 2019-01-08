@@ -24,16 +24,16 @@ ln -fs /usr/share/zoneinfo/Europe/Sofia /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
 
 # Install Java 7
-add-apt-repository ppa:openjdk-r/ppa  
-apt-get update   
-apt-get -y install openjdk-7-jdk
+#add-apt-repository ppa:openjdk-r/ppa
+#apt-get update   
+#apt-get -y install openjdk-7-jdk
 # Update alternatives - If necessary
 # update-java-alternatives -s java-1.7.0-openjdk-amd64
 # Set JAVA_HOME
 echo 'JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64' >> /etc/environment
 
 ## Install Java 8
-#apt-get install default-jdk
+apt-get install default-jdk
 ## Set JAVA_HOME
 #echo 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' >> /etc/environment
 
